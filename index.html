@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Groupe Conseil PME — Financement et stratégie d'affaires | Sorel-Tracy</title>
+<meta name="description" content="Groupe Conseil PME accompagne les dirigeants de PME québécoises dans la préparation de leur dossier de financement, du plan d'affaires jusqu'au déboursement des fonds.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1C2420;
+    --pine:#163029;
+    --pine-2:#0E211C;
+    --paper:#EFEEE5;
+    --paper-soft:#E5E2D3;
+    --white:#FFFFFF;
+    --brass:#AD8748;
+    --brass-deep:#8A6A34;
+    --brass-tint:#E7D9B9;
+    --line:rgba(28,36,32,.15);
+    --line-invert:rgba(239,238,229,.22);
+    --serif:'Fraunces', ui-serif, Georgia, serif;
+    --sans:'Inter', system-ui, -apple-system, sans-serif;
+    --container:1180px;
+  }
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:smooth; scroll-padding-top:88px;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--sans); line-height:1.6; font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{display:block; max-width:100%;}
+  a{color:inherit;}
+  h1,h2,h3{font-family:var(--serif); font-weight:600; margin:0; letter-spacing:-.01em; color:var(--ink);}
+  p{margin:0;}
+  .container{max-width:var(--container); margin-inline:auto; padding-inline:clamp(1.25rem,4vw,3rem);}
+  .section{padding-block:clamp(4rem,8vw,6.5rem);}
+  .eyebrow{font-size:.8rem; color:var(--brass-deep); font-weight:600; letter-spacing:.01em; margin-bottom:.9rem;}
+  .lede{font-size:clamp(1.05rem,.98rem + .3vw,1.2rem); max-width:56ch; color:var(--ink); opacity:.85;}
+  .hairline{height:1px; background:var(--line); border:0;}
+  .btn{
+    display:inline-flex; align-items:center; gap:.5rem; font-family:var(--sans); font-weight:600;
+    font-size:.95rem; padding:.85rem 1.5rem; border-radius:3px; text-decoration:none; cursor:pointer;
+    border:1px solid transparent; transition:background .18s ease, color .18s ease, border-color .18s ease;
+  }
+  .btn-primary{background:var(--brass); color:var(--pine-2);}
+  .btn-primary:hover{background:var(--brass-deep); color:var(--white);}
+  .btn-outline{border-color:var(--line-invert); color:var(--paper);}
+  .btn-outline:hover{border-color:var(--paper); background:rgba(239,238,229,.08);}
+  .btn-outline-dark{border-color:var(--line); color:var(--ink);}
+  .btn-outline-dark:hover{border-color:var(--ink);}
+  :focus-visible{outline:2px solid var(--brass-deep); outline-offset:3px;}
+
+  /* Header */
+  header{
+    position:sticky; top:0; z-index:50; background:rgba(239,238,229,.92);
+    backdrop-filter:blur(8px); border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; padding-block:1.1rem;}
+  .wordmark{font-family:var(--serif); font-size:1.28rem; font-weight:600; text-decoration:none; line-height:1; display:flex; flex-direction:column;}
+  .wordmark span.pme{color:var(--brass-deep);}
+  .wordmark small{font-family:var(--sans); font-weight:500; font-size:.66rem; letter-spacing:.03em; color:var(--ink); opacity:.6; margin-top:.28rem;}
+  .nav-links{display:flex; align-items:center; gap:2.1rem; list-style:none; margin:0; padding:0;}
+  .nav-links a{text-decoration:none; font-size:.94rem; font-weight:500; position:relative; padding-bottom:3px;}
+  .nav-links a::after{content:''; position:absolute; left:0; right:100%; bottom:0; height:1px; background:var(--brass-deep); transition:right .22s ease;}
+  .nav-links a:hover::after{right:0;}
+  .nav-right{display:flex; align-items:center; gap:1.4rem;}
+  .nav-phone{font-size:.92rem; font-weight:600; text-decoration:none; white-space:nowrap;}
+  .nav-toggle{display:none; background:none; border:0; cursor:pointer; padding:.4rem;}
+  .nav-toggle span{display:block; width:22px; height:2px; background:var(--ink); margin:5px 0; transition:transform .2s ease, opacity .2s ease;}
+
+  /* Hero */
+  .hero{background:var(--pine); color:var(--paper); position:relative; overflow:hidden;}
+  .hero .container{
+    padding-block:clamp(4.5rem,9vw,7rem); display:grid; grid-template-columns:1.05fr .95fr;
+    gap:2.5rem; align-items:center; position:relative; z-index:2;
+  }
+  .hero h1{color:var(--paper); font-size:clamp(2.3rem,1.7rem + 2.6vw,3.7rem); line-height:1.08;}
+  .hero .lede{color:var(--paper); opacity:.82; margin-top:1.4rem;}
+  .hero-ctas{display:flex; flex-wrap:wrap; gap:.9rem; margin-top:2.1rem;}
+  .hero-visual{position:relative;}
+  .hero-visual svg{width:100%; height:auto;}
+  .hero-glow{position:absolute; inset:0; background:radial-gradient(circle at 78% 18%, rgba(173,135,72,.22), transparent 55%); z-index:1; pointer-events:none;}
+  .hero-fade{animation:fadeUp .8s ease both;}
+  @keyframes fadeUp{from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);}}
+
+  /* Stats */
+  .stats .container{display:flex; flex-wrap:wrap; gap:2.5rem 3.5rem;}
+  .stat{flex:1 1 200px; padding-top:1.6rem; border-top:1px solid var(--line);}
+  .stat .num{font-family:var(--serif); font-size:clamp(2.1rem,1.8rem + 1vw,3rem); font-weight:600; line-height:1;}
+  .stat .cap{font-size:.9rem; opacity:.72; margin-top:.6rem; max-width:26ch;}
+
+  /* About */
+  .about .container{display:grid; grid-template-columns:1fr .78fr; gap:clamp(2.5rem,5vw,5rem); align-items:start;}
+  .about h2{font-size:clamp(1.9rem,1.6rem + 1.2vw,2.5rem); line-height:1.16; max-width:14ch;}
+  .about .lede{margin-top:1.3rem; opacity:1; color:var(--ink);}
+  .about p.body{margin-top:1.1rem; max-width:58ch; opacity:.88;}
+  .credentials{list-style:none; margin:1.8rem 0 0; padding:0; display:flex; flex-direction:column; gap:0;}
+  .credentials li{padding:.85rem 0; border-top:1px solid var(--line); font-size:.95rem;}
+  .credentials li:last-child{border-bottom:1px solid var(--line);}
+  .seal-wrap{display:flex; flex-direction:column; align-items:center; text-align:center; padding-top:.5rem;}
+  .seal-svg{width:min(230px,80%); color:var(--brass-deep);}
+  .seal-caption{font-size:.85rem; opacity:.65; margin-top:1.1rem; max-width:24ch;}
+
+  /* Process */
+  .process{background:var(--paper-soft);}
+  .process h2{font-size:clamp(1.9rem,1.6rem + 1.2vw,2.5rem); max-width:20ch;}
+  .process .lede{margin-top:1.1rem;}
+  .timeline{margin-top:3rem; display:grid; grid-template-columns:repeat(3,1fr); gap:2.6rem 2.2rem;}
+  .step{position:relative; padding-top:1.9rem; border-top:1px solid var(--line);}
+  .step .step-top{display:flex; align-items:center; gap:.9rem; margin-bottom:1rem;}
+  .step .num{font-family:var(--serif); font-size:1.1rem; color:var(--brass-deep); font-weight:600;}
+  .step svg{width:30px; height:30px; color:var(--pine); stroke-width:1.6; fill:none; stroke:currentColor;}
+  .step svg rect,.step svg circle,.step svg polygon{fill:none; stroke:currentColor;}
+  .step h3{font-size:1.1rem;}
+  .step p{font-size:.92rem; opacity:.78; margin-top:.55rem; max-width:32ch;}
+
+  /* Services */
+  .service-row{border-top:1px solid var(--line); padding-block:2.6rem; display:grid; grid-template-columns:.5fr 1.7fr 1fr; gap:2rem; align-items:start;}
+  .services .container > .service-row:last-child{border-bottom:1px solid var(--line);}
+  .service-icon svg{width:34px; height:34px; color:var(--pine); stroke:currentColor; stroke-width:1.5; fill:none;}
+  .service-icon svg rect,.service-icon svg polygon{fill:none;}
+  .service-title h3{font-size:clamp(1.35rem,1.2rem + .5vw,1.65rem);}
+  .service-title p.tag{font-size:.88rem; color:var(--brass-deep); font-weight:600; margin-top:.5rem;}
+  .service-desc p{opacity:.82; font-size:.97rem;}
+  .service-desc ul{margin:.9rem 0 0; padding-left:1.1rem; font-size:.9rem; opacity:.78;}
+  .service-desc li{margin-bottom:.35rem;}
+
+  /* Territory */
+  .territory{background:var(--pine); color:var(--paper);}
+  .territory .container{display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:2rem;}
+  .territory h2{color:var(--paper); font-size:clamp(1.7rem,1.5rem + 1vw,2.2rem); max-width:16ch;}
+  .territory-list{display:flex; flex-wrap:wrap; gap:0; max-width:520px;}
+  .territory-list span{
+    font-size:.95rem; padding:.4rem .95rem .4rem 0; margin-right:.95rem; border-right:1px solid var(--line-invert);
+  }
+  .territory-list span:last-child{border-right:0;}
+
+  /* Contact */
+  .contact{background:var(--pine-2); color:var(--paper);}
+  .contact .container{display:grid; grid-template-columns:1.1fr .9fr; gap:clamp(2.5rem,5vw,4rem);}
+  .contact h2{color:var(--paper); font-size:clamp(2rem,1.7rem + 1.4vw,2.9rem); max-width:14ch;}
+  .contact .lede{color:var(--paper); opacity:.8; margin-top:1.1rem;}
+  .contact-ctas{display:flex; flex-wrap:wrap; gap:.9rem; margin-top:2rem;}
+  .contact-card{border-top:1px solid var(--line-invert); padding-top:1.6rem;}
+  .contact-card + .contact-card{margin-top:1.6rem;}
+  .contact-card .k{font-size:.82rem; opacity:.62; margin-bottom:.4rem;}
+  .contact-card .v{font-size:1.05rem; font-weight:500;}
+  .contact-card a{text-decoration:none; border-bottom:1px solid var(--line-invert);}
+  .contact-card a:hover{border-color:var(--paper);}
+
+  /* Footer */
+  footer{background:var(--pine-2); color:var(--paper); border-top:1px solid var(--line-invert);}
+  footer .container{padding-block:2.4rem; display:flex; flex-wrap:wrap; justify-content:space-between; gap:1.5rem; align-items:center;}
+  .footer-word{font-family:var(--serif); font-size:1.05rem;}
+  .footer-links{display:flex; gap:1.6rem; list-style:none; margin:0; padding:0; flex-wrap:wrap;}
+  .footer-links a{text-decoration:none; font-size:.88rem; opacity:.75;}
+  .footer-links a:hover{opacity:1;}
+  .footer-fine{font-size:.8rem; opacity:.55;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .hero-fade{animation:none;}
+  }
+
+  @media (max-width:980px){
+    .about .container{grid-template-columns:1fr;}
+    .seal-wrap{order:-1;}
+    .timeline{grid-template-columns:repeat(2,1fr);}
+    .hero .container{grid-template-columns:1fr;}
+    .hero-visual{max-width:360px;}
+    .contact .container{grid-template-columns:1fr;}
+    .service-row{grid-template-columns:1fr; gap:.9rem;}
+  }
+  @media (max-width:760px){
+    .nav-links,.nav-phone.desktop-only{display:none;}
+    .nav-toggle{display:block;}
+    nav.open .nav-links{
+      display:flex; position:absolute; top:100%; left:0; right:0; background:var(--paper);
+      flex-direction:column; padding:1.5rem clamp(1.25rem,4vw,3rem); border-bottom:1px solid var(--line); gap:1.2rem;
+    }
+    .timeline{grid-template-columns:1fr;}
+    .territory .container{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav container" id="siteNav">
+    <a href="#accueil" class="wordmark">Groupe Conseil <span class="pme">PME</span><small>Financement et stratégie d'affaires</small></a>
+    <ul class="nav-links">
+      <li><a href="#apropos">À propos</a></li>
+      <li><a href="#demarche">Notre démarche</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="tel:+14508810440" class="nav-phone desktop-only">450 881-0440</a>
+      <a href="tel:+14508810440" class="btn btn-primary" style="padding:.6rem 1.2rem;">Planifier un appel</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" id="accueil">
+    <div class="hero-glow"></div>
+    <div class="container">
+      <div class="hero-fade">
+        <h1>Un dossier de financement solide, c'est la moitié du chemin vers votre croissance.</h1>
+        <p class="lede">Depuis 2013, Groupe Conseil PME accompagne les dirigeants de PME québécoises dans la préparation de leur dossier de financement — du plan d'affaires jusqu'au déboursement des fonds.</p>
+        <div class="hero-ctas">
+          <a href="tel:+14508810440" class="btn btn-primary">Planifier un appel</a>
+          <a href="#services" class="btn btn-outline">Découvrir nos services</a>
+        </div>
+      </div>
+      <div class="hero-visual hero-fade" style="animation-delay:.12s;" aria-hidden="true">
+        <svg viewBox="0 0 480 360" fill="none">
+          <circle cx="380" cy="90" r="170" fill="var(--brass)" opacity=".08"/>
+          <line x1="20" y1="80" x2="460" y2="80" stroke="var(--paper)" stroke-opacity=".12"/>
+          <line x1="20" y1="150" x2="460" y2="150" stroke="var(--paper)" stroke-opacity=".12"/>
+          <line x1="20" y1="220" x2="460" y2="220" stroke="var(--paper)" stroke-opacity=".12"/>
+          <line x1="20" y1="290" x2="460" y2="290" stroke="var(--paper)" stroke-opacity=".12"/>
+          <path d="M40,300 C100,290 130,242 172,236 C230,228 250,152 312,140 C362,131 382,92 440,70"
+                stroke="var(--brass)" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="40" cy="300" r="5" fill="var(--brass)"/>
+          <circle cx="230" cy="185" r="5" fill="var(--brass)"/>
+          <circle cx="440" cy="70" r="6" fill="var(--brass)"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats section" style="padding-block:3rem 3.5rem;">
+    <div class="container">
+      <div class="stat">
+        <div class="num">20 ans</div>
+        <div class="cap">d'expérience en administration des affaires et en accompagnement entrepreneurial</div>
+      </div>
+      <div class="stat">
+        <div class="num">200+</div>
+        <div class="cap">entrepreneurs accompagnés au cours des dix dernières années</div>
+      </div>
+      <div class="stat">
+        <div class="num">2013</div>
+        <div class="cap">Julie Bélisle est à la tête de Groupe Conseil PME depuis cette année</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about section" id="apropos">
+    <div class="container">
+      <div>
+        <p class="eyebrow">À propos</p>
+        <h2>Une alliée stratégique pour concrétiser vos ambitions d'affaires</h2>
+        <p class="lede">Julie Bélisle met plus de vingt ans d'expérience en administration des affaires, en accompagnement entrepreneurial et en recherche de partenaires financiers au service des PME québécoises.</p>
+        <p class="body">Elle se spécialise dans la préparation de dossiers de financement et accompagne chaque dirigeant à toutes les étapes du processus, de la première rencontre jusqu'à la conclusion de l'entente — avec un objectif constant : assurer un démarrage structuré et une croissance durable. Son travail s'appuie sur une fine compréhension des mécanismes d'investissement et sur un solide réseau de professionnels mobilisés au besoin pour bâtir un projet viable.</p>
+        <ul class="credentials">
+          <li>Baccalauréat en économie</li>
+          <li>Formation universitaire en entrepreneuriat</li>
+          <li>Certification en transfert d'entreprise</li>
+        </ul>
+      </div>
+      <div class="seal-wrap">
+        <svg class="seal-svg" viewBox="0 0 220 220" aria-hidden="true">
+          <circle cx="110" cy="110" r="102" stroke="currentColor" stroke-width="1.4" fill="none" opacity=".55"/>
+          <circle cx="110" cy="110" r="88" stroke="currentColor" stroke-width="1" fill="none" opacity=".4"/>
+          <line x1="110" y1="14" x2="110" y2="26" stroke="currentColor" opacity=".5"/>
+          <line x1="110" y1="194" x2="110" y2="206" stroke="currentColor" opacity=".5"/>
+          <line x1="14" y1="110" x2="26" y2="110" stroke="currentColor" opacity=".5"/>
+          <line x1="194" y1="110" x2="206" y2="110" stroke="currentColor" opacity=".5"/>
+          <text x="110" y="103" text-anchor="middle" font-family="Fraunces, serif" font-size="46" font-weight="600" fill="var(--ink)">JB</text>
+          <text x="110" y="128" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" letter-spacing=".03em" fill="var(--ink)" opacity=".7">Groupe Conseil PME</text>
+          <text x="110" y="144" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.5" fill="var(--ink)" opacity=".5">Direction depuis 2013</text>
+        </svg>
+        <p class="seal-caption">Basée à Sorel-Tracy, Julie Bélisle dirige Groupe Conseil PME et son réseau de partenaires financiers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process section" id="demarche">
+    <div class="container">
+      <p class="eyebrow">Notre démarche</p>
+      <h2>De l'idée au financement, six étapes pour structurer votre projet</h2>
+      <p class="lede">Que vous démarriez une entreprise ou prépariez sa prochaine phase de croissance, la même rigueur s'applique — du diagnostic initial jusqu'au versement des fonds.</p>
+
+      <div class="timeline">
+        <div class="step">
+          <div class="step-top"><span class="num">01</span>
+            <svg viewBox="0 0 40 40"><rect x="6" y="6" width="16" height="24" rx="1"/><line x1="10" y1="13" x2="20" y2="13"/><line x1="10" y1="18" x2="20" y2="18"/><circle cx="27" cy="27" r="6"/><line x1="31.2" y1="31.2" x2="35" y2="35"/></svg>
+          </div>
+          <h3>Diagnostic financier</h3>
+          <p>Évaluation complète des besoins réels : fonds de roulement, équipement, améliorations locatives et stratégie marketing.</p>
+        </div>
+        <div class="step">
+          <div class="step-top"><span class="num">02</span>
+            <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="14"/><path d="M20 11 L23.2 20 L20 29 L16.8 20 Z"/></svg>
+          </div>
+          <h3>Plan d'affaires</h3>
+          <p>Un document structuré et convaincant : vision, analyse de marché, stratégie et objectifs clairs.</p>
+        </div>
+        <div class="step">
+          <div class="step-top"><span class="num">03</span>
+            <svg viewBox="0 0 40 40"><line x1="7" y1="33" x2="33" y2="33"/><rect x="9" y="24" width="5" height="9"/><rect x="17.5" y="17" width="5" height="16"/><rect x="26" y="9" width="5" height="24"/></svg>
+          </div>
+          <h3>États financiers prévisionnels</h3>
+          <p>Bilan, état des résultats et budget de trésorerie pour appuyer votre demande avec des chiffres solides.</p>
+        </div>
+        <div class="step">
+          <div class="step-top"><span class="num">04</span>
+            <svg viewBox="0 0 40 40"><polygon points="20,7 33,15 7,15"/><line x1="9" y1="15" x2="9" y2="30"/><line x1="16" y1="15" x2="16" y2="30"/><line x1="24" y1="15" x2="24" y2="30"/><line x1="31" y1="15" x2="31" y2="30"/><line x1="6" y1="33" x2="34" y2="33"/></svg>
+          </div>
+          <h3>Stratégie de financement</h3>
+          <p>Identification des meilleures sources : prêts, investisseurs privés, subventions ou financement participatif.</p>
+        </div>
+        <div class="step">
+          <div class="step-top"><span class="num">05</span>
+            <svg viewBox="0 0 40 40"><circle cx="10" cy="12" r="4"/><circle cx="30" cy="12" r="4"/><circle cx="20" cy="30" r="4"/><line x1="13.5" y1="14" x2="26.5" y2="14"/><line x1="12" y1="15.5" x2="18" y2="27"/><line x1="28" y1="15.5" x2="22" y2="27"/></svg>
+          </div>
+          <h3>Réseau de partenaires</h3>
+          <p>Mise en relation avec des professionnels clés : comptables, conseillers juridiques et financiers.</p>
+        </div>
+        <div class="step">
+          <div class="step-top"><span class="num">06</span>
+            <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="14"/><path d="M13 20.5 L18 25.5 L28 14.5"/></svg>
+          </div>
+          <h3>Suivi jusqu'au déboursement</h3>
+          <p>Ajustements, suivi administratif et accompagnement jusqu'à la conclusion de l'entente.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services section" id="services">
+    <div class="container">
+      <p class="eyebrow">Services</p>
+      <h2 style="max-width:20ch;">Trois façons de faire avancer votre PME</h2>
+
+      <div class="service-row">
+        <div class="service-icon">
+          <svg viewBox="0 0 40 40"><path d="M20 33 V18"/><path d="M20 18 C20 10 12 9 9 9 C9 16 14 19 20 18Z"/><path d="M20 21 C20 14 28 13 31 13 C31 19 26 22 20 21Z"/></svg>
+        </div>
+        <div class="service-title">
+          <h3>Démarrage d'entreprise</h3>
+          <p class="tag">Transformer une idée en projet finançable</p>
+        </div>
+        <div class="service-desc">
+          <p>Nous structurons votre projet de A à Z pour qu'il devienne crédible aux yeux des investisseurs et partenaires financiers, avec une préparation rigoureuse dès le départ.</p>
+          <ul>
+            <li>Analyse des coûts de lancement</li>
+            <li>Plan d'affaires et prévisions financières</li>
+            <li>Accès à un réseau de partenaires financiers</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="service-row">
+        <div class="service-icon">
+          <svg viewBox="0 0 40 40"><path d="M7 27 L16 18 L22 24 L33 11"/><path d="M25 11 H33 V19"/></svg>
+        </div>
+        <div class="service-title">
+          <h3>Croissance d'entreprise</h3>
+          <p class="tag">Financer la prochaine étape</p>
+        </div>
+        <div class="service-desc">
+          <p>Acquisition, agrandissement, nouveaux équipements ou embauche : nous préparons un dossier solide pour que le manque de financement ne freine jamais vos ambitions.</p>
+          <ul>
+            <li>Analyse des états financiers et des opportunités</li>
+            <li>Rédaction d'un projet d'acquisition ou d'expansion</li>
+            <li>Accompagnement jusqu'au déboursement des fonds</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="service-row">
+        <div class="service-icon">
+          <svg viewBox="0 0 40 40"><rect x="8" y="6" width="18" height="26" rx="1"/><line x1="12" y1="13" x2="22" y2="13"/><line x1="12" y1="18" x2="22" y2="18"/><line x1="12" y1="23" x2="18" y2="23"/><path d="M24 27 L32 19 L35 22 L27 30 L23 31 Z"/></svg>
+        </div>
+        <div class="service-title">
+          <h3>Plan d'affaires</h3>
+          <p class="tag">Un document qui inspire confiance</p>
+        </div>
+        <div class="service-desc">
+          <p>Un plan d'affaires bien construit reste votre meilleur outil de persuasion. Nous en faisons un document clair, réaliste et adapté à votre secteur d'activité.</p>
+          <ul>
+            <li>Analyse de marché et positionnement</li>
+            <li>Stratégie et objectifs chiffrés</li>
+            <li>Prévisions financières réalistes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TERRITORY -->
+  <section class="territory section" style="padding-block:3.5rem;">
+    <div class="container">
+      <h2>Basée à Sorel-Tracy, active dans toute la région</h2>
+      <div class="territory-list">
+        <span>Montérégie</span><span>Centre-du-Québec</span><span>Mauricie</span><span>Montréal</span><span>Rive-Sud</span><span>Rive-Nord</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact section" id="contact">
+    <div class="container">
+      <div>
+        <p class="eyebrow" style="color:var(--brass);">Contact</p>
+        <h2>Prêt à structurer votre financement ?</h2>
+        <p class="lede">Discutons de votre projet — un premier échange permet de cerner rapidement vos besoins et les options qui s'offrent à vous.</p>
+        <div class="contact-ctas">
+          <a href="tel:+14508810440" class="btn btn-primary">Appeler maintenant</a>
+          <a href="mailto:info@servicespme.ca" class="btn btn-outline">Écrire un courriel</a>
+        </div>
+      </div>
+      <div>
+        <div class="contact-card">
+          <div class="k">Adresse</div>
+          <div class="v">22, rue Fortin<br>Sorel-Tracy (Québec) J3P 0B2</div>
+          <p style="margin-top:.6rem;"><a href="https://www.google.com/maps/dir/?api=1&destination=22+Rue+Fortin+Sorel-Tracy+QC+J3P+0B2" target="_blank" rel="noopener" style="font-size:.88rem;">Obtenir l'itinéraire</a></p>
+        </div>
+        <div class="contact-card">
+          <div class="k">Téléphone</div>
+          <div class="v"><a href="tel:+14508810440">450 881-0440</a></div>
+        </div>
+        <div class="contact-card">
+          <div class="k">Courriel</div>
+          <div class="v"><a href="mailto:info@servicespme.ca">info@servicespme.ca</a></div>
+        </div>
+        <div class="contact-card">
+          <div class="k">Horaire</div>
+          <div class="v">Lundi au vendredi, jusqu'à 17 h</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-word">Groupe Conseil <span style="color:var(--brass);">PME</span></div>
+    <ul class="footer-links">
+      <li><a href="#apropos">À propos</a></li>
+      <li><a href="#demarche">Notre démarche</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="footer-fine">© 2026 Groupe Conseil PME. Tous droits réservés.</div>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('siteNav');
+  toggle.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', isOpen);
+  });
+  nav.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+
+</body>
+</html>
